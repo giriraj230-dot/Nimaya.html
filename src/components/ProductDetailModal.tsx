@@ -109,11 +109,11 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-5 bg-[#243128]/55 backdrop-blur-sm">
-      <div className="relative w-full max-w-6xl bg-[#FFFDF7] rounded-[28px] border border-[#D8E6D3] shadow-2xl overflow-hidden max-h-[94vh] flex flex-col" role="dialog" aria-modal="true" aria-labelledby="modal-pdp-title">
+    <div className="nimaya-pdp-overlay fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-5 bg-[#243128]/55 backdrop-blur-sm">
+      <div className="nimaya-pdp-modal relative w-full max-w-6xl bg-[#FFFDF7] rounded-[28px] border border-[#D8E6D3] shadow-2xl overflow-hidden max-h-[94vh] flex flex-col" role="dialog" aria-modal="true" aria-labelledby="modal-pdp-title">
         <button onClick={onClose} className="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-white/95 hover:bg-[#EDF2EA] text-[#294735] border border-[#DCE5D8] shadow-sm" aria-label="Close details"><X className="w-5 h-5" /></button>
 
-        <div className="overflow-y-auto flex-1 p-4 sm:p-7 lg:p-9 text-left">
+        <div className="nimaya-pdp-scroll overflow-y-auto flex-1 p-4 sm:p-7 lg:p-9 text-left">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-10 items-start">
             <div>
               <div className="flex flex-col-reverse sm:flex-row gap-3">
@@ -157,7 +157,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
 
               {purchaseType === 'subscribe' && <div className="rounded-2xl bg-[#F1F6EE] border border-[#D7E4D2] p-3.5"><p className="text-xs font-bold text-[#31533C] mb-2">Choose delivery frequency</p><div className="flex flex-wrap gap-2">{([30,60,90] as Frequency[]).map(days => <button key={days} onClick={() => setFrequency(days)} className={`px-3 py-2 rounded-xl text-[11px] font-semibold border transition ${frequency === days ? 'bg-[#31533C] border-[#31533C] text-white' : 'bg-white border-[#CAD8C7] text-[#48604A]'}`}>Every {days} days</button>)}</div><p className="text-[10px] text-[#738071] mt-2">Skip, pause or cancel anytime.</p></div>}
 
-              <div className="flex items-center gap-3 pt-1"><div className="flex items-center border border-[#E4BFA8] rounded-xl bg-[#FFEBDD] overflow-hidden"><button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-3 py-3 hover:bg-[#FAD9C3]">−</button><span className="px-3 text-xs font-bold">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="px-3 py-3 hover:bg-[#FAD9C3]">+</button></div><button onClick={handleAdd} disabled={purchaseType === 'subscribe' && !frequency} className="flex-1 py-3.5 px-5 rounded-xl bg-[#BFDDB8] hover:bg-[#A9D0A2] disabled:bg-[#F2F3F0] text-[#244B31] disabled:text-[#9AA29A] border border-[#8FB58D] text-sm font-bold shadow-md transition hover:-translate-y-0.5">{addedNotice ? 'Added to Gentle Routine ✓' : purchaseType === 'subscribe' && !frequency ? 'Choose delivery frequency' : `Add to Gentle Routine — ${formatINR(currentPrice * quantity)}`}</button></div>
+              <div className="nimaya-pdp-buyrow flex items-center gap-3 pt-1"><div className="nimaya-pdp-qty flex items-center border border-[#E4BFA8] rounded-xl bg-[#FFEBDD] overflow-hidden"><button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-3 py-3 hover:bg-[#FAD9C3]">−</button><span className="px-3 text-xs font-bold">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="px-3 py-3 hover:bg-[#FAD9C3]">+</button></div><button onClick={handleAdd} disabled={purchaseType === 'subscribe' && !frequency} className="nimaya-pdp-add flex-1 py-3.5 px-5 rounded-xl bg-[#BFDDB8] hover:bg-[#A9D0A2] disabled:bg-[#F2F3F0] text-[#244B31] disabled:text-[#9AA29A] border border-[#8FB58D] text-sm font-bold shadow-md transition hover:-translate-y-0.5">{addedNotice ? 'Added to Gentle Routine ✓' : purchaseType === 'subscribe' && !frequency ? 'Choose delivery frequency' : `Add to Gentle Routine — ${formatINR(currentPrice * quantity)}`}</button></div>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] text-[#6F776F]"><span>✓ Secure checkout</span><span>✓ Gentle-care support</span><span>✓ Easy routine ordering</span></div>
             </div>
           </div>
