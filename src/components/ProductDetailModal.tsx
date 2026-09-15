@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { X, Star, Check, ChevronDown, ChevronLeft, ChevronRight, Droplets, Leaf, Sparkles } from 'lucide-react';
+import { X, Star, Check, ChevronDown, ChevronLeft, ChevronRight, Droplets, Leaf, Sparkles, ListChecks, ShieldCheck } from 'lucide-react';
 import { Product } from '../types';
 import { REVIEWS } from '../data/products';
 import { formatINR } from '../utils/format';
@@ -43,6 +43,9 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
     { title: 'Gentle routine', sub: product.ageGuidance },
     { title: 'Texture', sub: product.texture },
     { title: 'Ingredients + benefits', sub: 'Simple, clear care' },
+    { title: 'Ingredients', sub: 'What is inside' },
+    { title: 'How to use', sub: 'Simple steps' },
+    { title: 'Terms & conditions', sub: 'Care & safety' },
   ];
 
   const handleAdd = () => {
@@ -68,25 +71,46 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
         {!thumb && <><p className="font-serif-brand text-xl text-[#274634]">{product.texture}</p><p className="text-xs text-[#766F65] mt-2 max-w-[250px]">A closer look at the feel and experience of {product.name.toLowerCase()}.</p></>}
       </div>
     );
-    return (
-      <div className="w-full h-full bg-[#E8F0E5] flex flex-col justify-center p-5">
-        {!thumb && <p className="font-serif-brand text-xl text-[#274634] mb-4 text-center">Key Ingredients + Benefits</p>}
+    if (index === 3) return (
+      <div className="w-full h-full bg-[#DDEED8] flex flex-col justify-center p-5">
+        {!thumb && <p className="font-serif-brand text-xl text-[#214832] mb-4 text-center">Key Ingredients + Benefits</p>}
         <div className={`grid ${thumb ? 'grid-cols-1 gap-1' : 'grid-cols-3 gap-2'}`}>
-          {topIngredients.map((ing, i) => (
-            <div key={ing.name} className={`bg-white/85 rounded-xl ${thumb ? 'p-1' : 'p-3'} text-center border border-white`}>
-              {!thumb && <div className="mx-auto mb-2 w-8 h-8 rounded-full bg-[#D8E5D5] flex items-center justify-center"><Sparkles className="w-4 h-4 text-[#31533C]" /></div>}
+          {topIngredients.map((ing) => (
+            <div key={ing.name} className={`bg-white rounded-xl ${thumb ? 'p-1' : 'p-3'} text-center border border-[#C9DEC4]`}>
+              {!thumb && <div className="mx-auto mb-2 w-8 h-8 rounded-full bg-[#CFE4C9] flex items-center justify-center"><Sparkles className="w-4 h-4 text-[#31533C]" /></div>}
               <p className={`${thumb ? 'text-[6px]' : 'text-[11px]'} font-semibold text-[#284633] line-clamp-2`}>{ing.name}</p>
-              {!thumb && <p className="text-[10px] text-[#6A746A] mt-1 line-clamp-3">{ing.purpose}</p>}
+              {!thumb && <p className="text-[10px] text-[#596B5C] mt-1 line-clamp-3">{ing.purpose}</p>}
             </div>
           ))}
         </div>
+      </div>
+    );
+    if (index === 4) return (
+      <div className="w-full h-full bg-[#FFF0DF] flex flex-col justify-center p-5">
+        <div className={`${thumb ? 'hidden' : 'block'} text-center mb-4`}><p className="font-serif-brand text-xl text-[#6E452D]">Ingredients</p><p className="text-[10px] text-[#896B57] mt-1">Clear, simple and easy to understand</p></div>
+        <div className={`grid ${thumb ? 'grid-cols-1 gap-1' : 'grid-cols-2 gap-2'}`}>
+          {product.ingredients.slice(0, thumb ? 3 : 6).map((ing) => <div key={ing.name} className={`${thumb ? 'p-1' : 'p-2.5'} rounded-xl bg-white/90 border border-[#F0D7C2]`}><p className={`${thumb ? 'text-[6px]' : 'text-[10px]'} font-bold text-[#6B4935] line-clamp-1`}>{ing.name}</p>{!thumb && <p className="text-[9px] text-[#806C60] mt-0.5 line-clamp-2">{ing.purpose}</p>}</div>)}
+        </div>
+      </div>
+    );
+    if (index === 5) return (
+      <div className="w-full h-full bg-[#E5F2E7] flex flex-col justify-center p-5">
+        {!thumb && <div className="text-center mb-4"><ListChecks className="w-8 h-8 mx-auto text-[#356044] mb-2"/><p className="font-serif-brand text-xl text-[#214832]">How to Use</p></div>}
+        <div className="space-y-2">{product.usageDirections.slice(0, thumb ? 3 : 4).map((step,i)=><div key={step} className={`flex items-start ${thumb ? 'gap-1' : 'gap-2'} bg-white/90 rounded-xl ${thumb ? 'p-1' : 'p-2.5'} border border-[#CFE2D1]`}><span className={`${thumb ? 'w-3 h-3 text-[6px]' : 'w-6 h-6 text-[10px]'} shrink-0 rounded-full bg-[#4F7759] text-white flex items-center justify-center font-bold`}>{i+1}</span><p className={`${thumb ? 'text-[5px]' : 'text-[10px]'} text-[#526658] leading-snug line-clamp-2`}>{step}</p></div>)}</div>
+      </div>
+    );
+    return (
+      <div className="w-full h-full bg-[#FFF4E9] flex flex-col justify-center p-5 text-center">
+        <ShieldCheck className={`${thumb ? 'w-6 h-6 mb-1' : 'w-10 h-10 mb-3'} mx-auto text-[#9A6446]`} />
+        <p className={`${thumb ? 'text-[7px]' : 'text-xl'} font-serif-brand text-[#6E452D]`}>Terms & Conditions</p>
+        {!thumb && <><p className="text-[10px] text-[#7B6658] mt-3 leading-relaxed max-w-sm mx-auto">{product.precautions}</p><div className="mt-4 rounded-xl bg-white/80 border border-[#EFD9C7] p-3"><p className="text-[10px] font-semibold text-[#76513B]">Please follow the product directions and age guidance shown on this page.</p></div></>}
       </div>
     );
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-5 bg-[#243128]/55 backdrop-blur-sm">
-      <div className="relative w-full max-w-6xl bg-[#FFFEFB] rounded-[28px] border border-[#DFE6DA] shadow-2xl overflow-hidden max-h-[94vh] flex flex-col" role="dialog" aria-modal="true" aria-labelledby="modal-pdp-title">
+      <div className="relative w-full max-w-6xl bg-[#FFFDF7] rounded-[28px] border border-[#D8E6D3] shadow-2xl overflow-hidden max-h-[94vh] flex flex-col" role="dialog" aria-modal="true" aria-labelledby="modal-pdp-title">
         <button onClick={onClose} className="absolute top-4 right-4 z-30 p-2.5 rounded-full bg-white/95 hover:bg-[#EDF2EA] text-[#294735] border border-[#DCE5D8] shadow-sm" aria-label="Close details"><X className="w-5 h-5" /></button>
 
         <div className="overflow-y-auto flex-1 p-4 sm:p-7 lg:p-9 text-left">
@@ -98,7 +122,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
                     <button key={item.title} onClick={() => setActiveImage(idx)} className={`shrink-0 w-[72px] h-[72px] rounded-xl overflow-hidden border-2 bg-[#F7F4EE] transition-all ${activeImage === idx ? 'border-[#31533C] shadow-sm' : 'border-[#E5E4DC] hover:border-[#9FB19D]'}`} aria-label={`View ${item.title}`}><GalleryVisual index={idx} thumb /></button>
                   ))}
                 </div>
-                <div className="relative flex-1 aspect-square rounded-3xl overflow-hidden border border-[#E0E7DC] bg-[#F7F5EF] min-h-[310px] sm:min-h-0">
+                <div className="relative flex-1 aspect-square rounded-3xl overflow-hidden border border-[#E0E7DC] bg-[#F1F7ED] min-h-[310px] sm:min-h-0">
                   <GalleryVisual index={activeImage} />
                   {discountPercent > 0 && <span style={{ backgroundColor: '#FFF7F2', color: '#8A5947', borderColor: '#F1DCD2' }} className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold border">{discountPercent}% OFF</span>}
                   <span className="absolute top-4 right-4 max-w-[58%] px-2.5 py-1 rounded-full text-[10px] font-semibold bg-white/90 text-[#31533C] border border-[#DDE7DA] truncate">{galleryLabels[activeImage].title}</span>
@@ -119,7 +143,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
               <p className="text-sm text-[#5F5A53] leading-relaxed">{product.shortDescription}</p>
 
               <div className="grid grid-cols-3 gap-2">
-                {topBenefits.map((benefit) => <div key={benefit} className="rounded-xl bg-[#F6F7F2] border border-[#E4E8DF] p-2.5 text-center"><Check className="w-4 h-4 text-[#31533C] mx-auto mb-1"/><p className="text-[10px] leading-snug text-[#5F675F] line-clamp-3">{benefit}</p></div>)}
+                {topBenefits.map((benefit) => <div key={benefit} className="rounded-xl bg-[#EDF6E9] border border-[#D5E7D0] p-2.5 text-center"><Check className="w-4 h-4 text-[#31533C] mx-auto mb-1"/><p className="text-[10px] leading-snug text-[#5F675F] line-clamp-3">{benefit}</p></div>)}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
@@ -141,7 +165,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
           <div className="mt-9 border-t border-[#E1E7DD] pt-6">
             <div className="flex flex-wrap gap-2">{([['overview','Overview'],['usage','How to Use'],['reviews','Parent Reviews'],['faq','FAQs']] as [Tab,string][]).map(([key,label]) => <button key={key} onClick={() => setActiveTab(key)} className={`px-4 py-2 rounded-full text-xs font-semibold ${activeTab === key ? 'bg-[#274634] text-white' : 'bg-[#F3F3ED] text-[#59645B] hover:bg-[#E8ECE4]'}`}>{label}</button>)}</div>
 
-            {activeTab === 'overview' && <div className="pt-5 grid grid-cols-1 lg:grid-cols-2 gap-4"><div className="rounded-2xl bg-[#F5F6F0] border border-[#E2E7DE] p-5"><h3 className="font-serif-brand text-xl text-[#274634]">Why Parents Love It</h3><div className="space-y-2 mt-3">{topBenefits.map(b => <div key={b} className="flex gap-2 text-xs text-[#596159]"><Check className="w-4 h-4 text-[#31533C] shrink-0"/><span>{b}</span></div>)}</div></div><div className="rounded-2xl bg-[#E8F0E5] border border-[#D8E5D4] p-5"><h3 className="font-serif-brand text-xl text-[#274634]">Key Ingredients</h3><p className="text-xs text-[#657064] mt-1">The essentials, kept simple.</p><div className="flex flex-wrap gap-2 mt-3">{topIngredients.map(i => <span key={i.name} className="bg-white/80 border border-white rounded-full px-3 py-1.5 text-[11px] font-semibold text-[#3D5B45]">{i.name}</span>)}</div><button onClick={() => setShowIngredients(!showIngredients)} className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#31533C]">View full ingredient list <ChevronDown className={`w-3.5 h-3.5 transition ${showIngredients ? 'rotate-180' : ''}`}/></button></div>{showIngredients && <div className="lg:col-span-2 rounded-2xl border border-[#E3E5DE] overflow-hidden bg-white">{product.ingredients.map(ing => <div key={ing.name} className="p-3.5 border-b last:border-b-0 border-[#ECEDE8]"><p className="text-xs font-bold text-[#304437]">{ing.name}</p><p className="text-[11px] text-[#6D716B] mt-0.5">{ing.purpose}</p></div>)}</div>}</div>}
+            {activeTab === 'overview' && <div className="pt-5 grid grid-cols-1 lg:grid-cols-2 gap-4"><div className="rounded-2xl bg-[#F0F7EC] border border-[#D8E8D3] p-5"><h3 className="font-serif-brand text-xl text-[#274634]">Why Parents Love It</h3><div className="space-y-2 mt-3">{topBenefits.map(b => <div key={b} className="flex gap-2 text-xs text-[#596159]"><Check className="w-4 h-4 text-[#31533C] shrink-0"/><span>{b}</span></div>)}</div></div><div className="rounded-2xl bg-[#E0F0DB] border border-[#CDE3C7] p-5"><h3 className="font-serif-brand text-xl text-[#274634]">Key Ingredients</h3><p className="text-xs text-[#657064] mt-1">The essentials, kept simple.</p><div className="flex flex-wrap gap-2 mt-3">{topIngredients.map(i => <span key={i.name} className="bg-white/80 border border-white rounded-full px-3 py-1.5 text-[11px] font-semibold text-[#3D5B45]">{i.name}</span>)}</div><button onClick={() => setShowIngredients(!showIngredients)} className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#31533C]">View full ingredient list <ChevronDown className={`w-3.5 h-3.5 transition ${showIngredients ? 'rotate-180' : ''}`}/></button></div>{showIngredients && <div className="lg:col-span-2 rounded-2xl border border-[#E3E5DE] overflow-hidden bg-white">{product.ingredients.map(ing => <div key={ing.name} className="p-3.5 border-b last:border-b-0 border-[#ECEDE8]"><p className="text-xs font-bold text-[#304437]">{ing.name}</p><p className="text-[11px] text-[#6D716B] mt-0.5">{ing.purpose}</p></div>)}</div>}</div>}
 
             {activeTab === 'usage' && <div className="pt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">{product.usageDirections.map((step,i) => <div key={step} className="rounded-2xl border border-[#E3E5DE] bg-[#FBFAF6] p-4 flex gap-3"><span className="w-7 h-7 rounded-full bg-[#31533C] text-white text-xs font-bold flex items-center justify-center shrink-0">{i+1}</span><p className="text-xs leading-relaxed text-[#5D625C]">{step}</p></div>)}<div className="sm:col-span-2 rounded-2xl bg-[#F8EFE7] border border-[#EDDED1] p-4"><p className="text-xs font-bold text-[#775A46]">Please note</p><p className="text-xs text-[#6C5F55] mt-1">{product.precautions}</p></div></div>}
 
