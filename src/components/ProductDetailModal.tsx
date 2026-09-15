@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { X, Star, Check, ChevronDown, ChevronLeft, ChevronRight, Sparkles, ListChecks, ShieldCheck } from 'lucide-react';
+import { X, Star, Check, ChevronDown, ChevronLeft, ChevronRight, Droplets, Leaf, Sparkles, ListChecks, ShieldCheck } from 'lucide-react';
 import { Product } from '../types';
 import { REVIEWS } from '../data/products';
 import { formatINR } from '../utils/format';
