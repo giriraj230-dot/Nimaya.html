@@ -16,13 +16,13 @@ export function RoutineBar({ selectedFilter, onSelectFilter }: RoutineBarProps) 
   ];
 
   return (
-    <div className="w-full bg-[#F3EFEA] rounded-2xl p-2 sm:p-3 border border-[#E7DFD4] max-w-4xl mx-auto shadow-2xs">
+    <div className="w-full bg-[#E8EFE8] rounded-2xl p-2 sm:p-3 border border-[#CBD8CB] max-w-4xl mx-auto shadow-2xs">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 mb-2 sm:mb-3">
-        <div className="flex items-center gap-2 text-xs font-semibold text-[#544D45]">
-          <Sparkles className="w-3.5 h-3.5 text-[#6B7F6D]" />
+        <div className="flex items-center gap-2 text-xs font-semibold text-[#34483A]">
+          <Sparkles className="w-3.5 h-3.5 text-[#56705C]" />
           <span>Filter by Little One’s Age Stage:</span>
         </div>
-        <span className="text-[11px] text-[#7A7167]">Formulated for delicate skin 0–4 years</span>
+        <span className="text-[11px] font-medium text-[#5E6F62]">Formulated for delicate skin 0–4 years</span>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -36,12 +36,12 @@ export function RoutineBar({ selectedFilter, onSelectFilter }: RoutineBarProps) 
               onClick={() => onSelectFilter(tab.id)}
               className={`p-2.5 sm:p-3 rounded-xl text-left transition-all cursor-pointer ${
                 isActive
-                  ? 'bg-white text-[#2C2926] shadow-sm border border-[#DDD4C8] ring-1 ring-[#C49E85]/50'
-                  : 'bg-transparent text-[#5C554D] hover:bg-white/60'
+                  ? 'bg-[#FFFDF9] text-[#26382C] shadow-sm border border-[#B9CDBD] ring-1 ring-[#91AD98]/60'
+                  : 'bg-transparent text-[#3F5145] hover:bg-[#F8FBF7] hover:shadow-sm'
               }`}
             >
               <div className="text-xs font-bold leading-tight">{tab.label}</div>
-              <div className="text-[10px] text-[#786E63] mt-0.5 truncate">{tab.desc}</div>
+              <div className="text-[10px] text-[#637167] mt-0.5 truncate">{tab.desc}</div>
             </button>
           );
         })}
