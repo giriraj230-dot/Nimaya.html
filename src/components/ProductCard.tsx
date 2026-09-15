@@ -30,7 +30,7 @@ export function ProductCard({ product, onSelectProduct, onAddToCart }: ProductCa
               {product.ageBracket === 'all' ? '0–4 Yrs' : '6m+ Safe'}
             </span>
             {discountPercent > 0 && (
-              <span className="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase bg-[#FFF3EC] text-[#A45D46] border border-[#F2D8CA] shadow-xs">
+              <span style={{ backgroundColor: '#FFF7F2', color: '#8A5947', borderColor: '#F1DCD2' }} className="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase border shadow-xs">
                 {discountPercent}% OFF
               </span>
             )}
@@ -119,7 +119,7 @@ export function ProductCard({ product, onSelectProduct, onAddToCart }: ProductCa
           <button
             id={`add-to-cart-${product.id}`}
             onClick={() => onAddToCart(product)}
-            className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#F2F7EF] hover:bg-[#E6F0E2] text-[#4E6A54] border border-[#D7E5D3] text-xs font-semibold transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-sm shrink-0"
+            style={{ backgroundColor: '#F4F8F1', color: '#526A55', borderColor: '#DCE8D8' }} className="inline-flex items-center gap-1 px-4 py-2 rounded-full border text-xs font-semibold transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-sm hover:brightness-[0.97] shrink-0"
           >
             <Plus className="w-3.5 h-3.5" />
             Add to Bag

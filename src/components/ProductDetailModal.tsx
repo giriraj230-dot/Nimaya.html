@@ -100,7 +100,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
                 </div>
                 <div className="relative flex-1 aspect-square rounded-3xl overflow-hidden border border-[#E0E7DC] bg-[#F7F5EF] min-h-[310px] sm:min-h-0">
                   <GalleryVisual index={activeImage} />
-                  {discountPercent > 0 && <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold bg-[#FFF3EC] text-[#A45D46] border border-[#F2D8CA]">{discountPercent}% OFF</span>}
+                  {discountPercent > 0 && <span style={{ backgroundColor: '#FFF7F2', color: '#8A5947', borderColor: '#F1DCD2' }} className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] font-bold border">{discountPercent}% OFF</span>}
                   <span className="absolute top-4 right-4 max-w-[58%] px-2.5 py-1 rounded-full text-[10px] font-semibold bg-white/90 text-[#31533C] border border-[#DDE7DA] truncate">{galleryLabels[activeImage].title}</span>
                 </div>
               </div>
