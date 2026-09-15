@@ -41,3 +41,123 @@
   animation-play-state: paused;
 }
 
+
+/* 2026 interface refresh: richer Nimaya palette + interactive surfaces */
+:root {
+  --nimaya-ink: #26372f;
+  --nimaya-forest: #3f6252;
+  --nimaya-sage: #8fae99;
+  --nimaya-cream: #fffaf2;
+  --nimaya-sand: #ead9c6;
+  --nimaya-peach: #e6b39a;
+  --nimaya-rose: #c97f6b;
+}
+
+body {
+  margin: 0;
+  color: var(--nimaya-ink);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(230,179,154,.24), transparent 28rem),
+    radial-gradient(circle at 92% 34%, rgba(143,174,153,.23), transparent 30rem),
+    linear-gradient(180deg, #fffaf2 0%, #f4eee4 48%, #eef3ed 100%);
+  background-attachment: fixed;
+}
+
+/* The page subtly changes mood as content moves over the fixed gradient. */
+.nimaya-page { background: transparent !important; overflow: clip; }
+.nimaya-page main > div { position: relative; }
+
+.nimaya-page section {
+  position: relative;
+  transition: background-color .45s ease, border-color .35s ease, transform .35s ease;
+}
+
+#collection-section {
+  max-width: none !important;
+  padding-left: max(1rem, calc((100vw - 80rem)/2 + 1.5rem)) !important;
+  padding-right: max(1rem, calc((100vw - 80rem)/2 + 1.5rem)) !important;
+  background: linear-gradient(135deg, rgba(255,255,255,.62), rgba(238,243,237,.78));
+  border-top: 1px solid rgba(63,98,82,.10);
+  border-bottom: 1px solid rgba(63,98,82,.12);
+}
+
+/* Cards become tactile rather than flat. */
+.nimaya-page .group.rounded-2xl.bg-white,
+.nimaya-page .rounded-3xl.bg-white {
+  box-shadow: 0 10px 30px rgba(38,55,47,.07);
+}
+
+.nimaya-page .group.rounded-2xl.bg-white:hover {
+  transform: translateY(-8px);
+  border-color: rgba(63,98,82,.38) !important;
+  box-shadow: 0 20px 46px rgba(38,55,47,.15);
+}
+
+.nimaya-page button,
+.nimaya-page a { transition: transform .22s ease, box-shadow .22s ease, background-color .22s ease, color .22s ease, border-color .22s ease; }
+.nimaya-page button:hover { transform: translateY(-2px); }
+.nimaya-page button:active { transform: translateY(0) scale(.98); }
+
+/* Stronger premium CTA treatment. */
+.nimaya-page button[class*="bg-[#2C2926]"] {
+  background: linear-gradient(135deg, #29483a, #3f6252) !important;
+  box-shadow: 0 8px 20px rgba(41,72,58,.18);
+}
+.nimaya-page button[class*="bg-[#2C2926]"]:hover {
+  background: linear-gradient(135deg, #365b49, #527764) !important;
+  box-shadow: 0 12px 26px rgba(41,72,58,.28);
+}
+
+/* Scroll-aware navigation. */
+.nimaya-nav {
+  transition: background-color .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.nimaya-nav.is-scrolled {
+  background: rgba(255,250,242,.94) !important;
+  border-color: rgba(63,98,82,.16) !important;
+  box-shadow: 0 12px 34px rgba(38,55,47,.10);
+}
+.nimaya-scroll-progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 3px;
+  width: var(--scroll-progress, 0%);
+  background: linear-gradient(90deg, #c97f6b, #e6b39a 45%, #3f6252);
+  box-shadow: 0 0 14px rgba(201,127,107,.38);
+  transition: width .08s linear;
+}
+
+/* Announcement strip has more identity. */
+.nimaya-nav > div:first-child {
+  background: linear-gradient(90deg, #29483a, #456c59, #29483a) !important;
+  color: #fff !important;
+  border: 0 !important;
+}
+.nimaya-nav > div:first-child span { color: rgba(255,255,255,.9) !important; }
+.nimaya-nav > div:first-child span[class*="rounded-full"] { background: #f0c2a9 !important; }
+
+/* Headings and small labels gain contrast. */
+.nimaya-page .font-serif-brand { letter-spacing: -.018em; }
+.nimaya-page span[class*="uppercase"][class*="tracking"] { color: #8d5b4b !important; }
+
+/* Soft alternating testimonial area. */
+.nimaya-testimonials {
+  max-width: none !important;
+  padding-left: max(1rem, calc((100vw - 80rem)/2 + 1.5rem)) !important;
+  padding-right: max(1rem, calc((100vw - 80rem)/2 + 1.5rem)) !important;
+  background: linear-gradient(135deg, rgba(235,216,198,.64), rgba(255,250,242,.82));
+  border-block: 1px solid rgba(201,127,107,.14);
+}
+.nimaya-testimonials > div:last-child > div {
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.nimaya-testimonials > div:last-child > div:hover {
+  transform: translateY(-6px) rotate(-.25deg);
+  border-color: rgba(201,127,107,.35) !important;
+  box-shadow: 0 18px 42px rgba(91,62,49,.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nimaya-page *, .nimaya-scroll-progress { transition-duration: .01ms !important; }
+}

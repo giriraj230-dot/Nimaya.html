@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ShoppingBag, Sparkles, Menu, X, ShieldCheck } from 'lucide-react';
 import { Logo } from './Logo';
 import { ScreenView } from '../types';
@@ -30,9 +30,18 @@ export function Navbar({
   onOpenBrandPack,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 28);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#FAF8F5]/90 border-b border-[#EFE9E1] transition-all">
+    <header className={`nimaya-nav sticky top-0 z-40 w-full backdrop-blur-xl bg-[#FFFAF2]/88 border-b border-[#E7DDD0] ${isScrolled ? 'is-scrolled' : ''}`}>
+      <div className="nimaya-scroll-progress" aria-hidden="true" />
       {/* Reassurance Announcement Banner - Sliding Marquee */}
       <div className="bg-[#F3EFEA] text-[#5C554D] text-xs font-medium py-2 border-b border-[#EBE4DA] overflow-hidden select-none">
         <div className="animate-marquee flex items-center">

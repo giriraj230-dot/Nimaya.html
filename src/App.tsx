@@ -27,6 +27,7 @@ export default function App() {
   const [isBrandPackOpen, setIsBrandPackOpen] = useState(false);
   const [selectedFreeSample, setSelectedFreeSample] = useState<string>('sponge');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Cart State with Local Storage persistence
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -37,6 +38,20 @@ export default function App() {
       return [];
     }
   });
+
+  useEffect(() => {
+    const updateScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
+    };
+    updateScroll();
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    window.addEventListener('resize', updateScroll);
+    return () => {
+      window.removeEventListener('scroll', updateScroll);
+      window.removeEventListener('resize', updateScroll);
+    };
+  }, [currentView]);
 
   useEffect(() => {
     try {
@@ -118,7 +133,7 @@ export default function App() {
   const cartTotalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#2C2926] selection:bg-[#EAE1D4]">
+    <div className="nimaya-page min-h-screen flex flex-col text-[#26372F] selection:bg-[#E6B39A]/40" style={{ '--scroll-progress': `${scrollProgress}%` } as React.CSSProperties}>
       {/* Toast Notification */}
       <AnimatePresence>
         {toastMessage && (
@@ -210,7 +225,7 @@ export default function App() {
             />
 
             {/* Testimonials / Parent Voices */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-left">
+            <section className="nimaya-testimonials max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-left">
               <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#6B7F6D]">
                   Quiet Confidence
