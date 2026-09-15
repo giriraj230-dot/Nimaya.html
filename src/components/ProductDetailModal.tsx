@@ -134,7 +134,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
               </div>
             </div>
 
-            <div className="space-y-4 pr-0 lg:pr-4">
+            <div className="space-y-4 pr-0 lg:pr-4 rounded-[28px] bg-[#FFF5E8] border border-[#F1D8BE] p-5 sm:p-6 shadow-[0_12px_35px_rgba(91,75,53,0.08)]">
               <div className="flex flex-wrap items-center gap-2 pr-12">
                 <span className="text-[11px] font-semibold text-[#31533C] bg-[#E7EFE4] px-2.5 py-1 rounded-full">{product.category}</span>
                 <span className="flex items-center gap-1 text-xs text-[#6F6A62]"><Star className="w-3.5 h-3.5 fill-[#B98D55] text-[#B98D55]"/><b className="text-[#294735]">{product.rating}</b> ({product.reviewCount})</span>
@@ -143,21 +143,21 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
               <p className="text-sm text-[#5F5A53] leading-relaxed">{product.shortDescription}</p>
 
               <div className="grid grid-cols-3 gap-2">
-                {topBenefits.map((benefit) => <div key={benefit} className="rounded-xl bg-[#EDF6E9] border border-[#D5E7D0] p-2.5 text-center"><Check className="w-4 h-4 text-[#31533C] mx-auto mb-1"/><p className="text-[10px] leading-snug text-[#5F675F] line-clamp-3">{benefit}</p></div>)}
+                {topBenefits.map((benefit) => <div key={benefit} className="rounded-xl bg-[#E3F1DD] border border-[#BED6B7] p-2.5 text-center shadow-sm"><Check className="w-4 h-4 text-[#31533C] mx-auto mb-1"/><p className="text-[10px] leading-snug text-[#5F675F] line-clamp-3">{benefit}</p></div>)}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                <button onClick={() => { setPurchaseType('one-time'); setFrequency(null); }} className={`p-3.5 rounded-2xl border text-left transition-all ${purchaseType === 'one-time' ? 'border-[#31533C] bg-[#FFFDF8] ring-1 ring-[#31533C]' : 'border-[#E3DED4] bg-[#FFFDF8]'}`}>
+                <button onClick={() => { setPurchaseType('one-time'); setFrequency(null); }} className={`p-3.5 rounded-2xl border text-left transition-all ${purchaseType === 'one-time' ? 'border-[#C97C5D] bg-[#FFE7D6] ring-1 ring-[#C97C5D] shadow-sm' : 'border-[#E8C7B3] bg-[#FFF0E4] hover:bg-[#FFE8D8]'}`}>
                   <p className="text-xs font-bold text-[#2E4034]">One-Time Purchase</p><div className="flex items-baseline gap-2 mt-1"><span className="font-serif-brand text-xl font-bold text-[#274634]">{formatINR(product.price)}</span>{product.originalPrice && <span className="text-xs line-through text-[#999086]">{formatINR(product.originalPrice)}</span>}</div>
                 </button>
-                <button onClick={() => setPurchaseType('subscribe')} className={`relative p-3.5 rounded-2xl border text-left transition-all bg-[#DDEAD9] ${purchaseType === 'subscribe' ? 'border-[#31533C] ring-1 ring-[#31533C]' : 'border-[#C9D9C5]'}`}>
-                  <span className="absolute -top-2 right-2 text-[9px] font-bold bg-[#31533C] text-white px-2 py-1 rounded-full">SAVE 10%</span><p className="text-xs font-bold text-[#274634]">Subscribe & Save 10%</p><p className="font-serif-brand text-xl font-bold text-[#274634] mt-1">{formatINR(subscriptionPrice)} <span className="text-[10px] font-sans font-normal">/ delivery</span></p>
+                <button onClick={() => setPurchaseType('subscribe')} className={`relative p-3.5 rounded-2xl border text-left transition-all bg-[#D4E8C9] hover:bg-[#C8E0BC] ${purchaseType === 'subscribe' ? 'border-[#5E8A63] ring-1 ring-[#5E8A63] shadow-sm' : 'border-[#AAC8A6]'}`}>
+                  <span className="absolute -top-2 right-2 text-[9px] font-bold bg-[#F4B184] text-[#5A321F] border border-[#E99A68] px-2 py-1 rounded-full shadow-sm">SAVE 10%</span><p className="text-xs font-bold text-[#274634]">Subscribe & Save 10%</p><p className="font-serif-brand text-xl font-bold text-[#274634] mt-1">{formatINR(subscriptionPrice)} <span className="text-[10px] font-sans font-normal">/ delivery</span></p>
                 </button>
               </div>
 
               {purchaseType === 'subscribe' && <div className="rounded-2xl bg-[#F1F6EE] border border-[#D7E4D2] p-3.5"><p className="text-xs font-bold text-[#31533C] mb-2">Choose delivery frequency</p><div className="flex flex-wrap gap-2">{([30,60,90] as Frequency[]).map(days => <button key={days} onClick={() => setFrequency(days)} className={`px-3 py-2 rounded-xl text-[11px] font-semibold border transition ${frequency === days ? 'bg-[#31533C] border-[#31533C] text-white' : 'bg-white border-[#CAD8C7] text-[#48604A]'}`}>Every {days} days</button>)}</div><p className="text-[10px] text-[#738071] mt-2">Skip, pause or cancel anytime.</p></div>}
 
-              <div className="flex items-center gap-3 pt-1"><div className="flex items-center border border-[#D8D6CD] rounded-xl bg-[#F8F6F0] overflow-hidden"><button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-3 py-3 hover:bg-[#ECEDE7]">−</button><span className="px-3 text-xs font-bold">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="px-3 py-3 hover:bg-[#ECEDE7]">+</button></div><button onClick={handleAdd} disabled={purchaseType === 'subscribe' && !frequency} className="flex-1 py-3.5 px-5 rounded-xl bg-[#F2F7EF] hover:bg-[#E6F0E2] disabled:bg-[#F2F3F0] text-[#4E6A54] disabled:text-[#9AA29A] border border-[#D7E5D3] text-sm font-bold shadow-sm transition">{addedNotice ? 'Added to Gentle Routine ✓' : purchaseType === 'subscribe' && !frequency ? 'Choose delivery frequency' : `Add to Gentle Routine — ${formatINR(currentPrice * quantity)}`}</button></div>
+              <div className="flex items-center gap-3 pt-1"><div className="flex items-center border border-[#E4BFA8] rounded-xl bg-[#FFEBDD] overflow-hidden"><button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-3 py-3 hover:bg-[#FAD9C3]">−</button><span className="px-3 text-xs font-bold">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="px-3 py-3 hover:bg-[#FAD9C3]">+</button></div><button onClick={handleAdd} disabled={purchaseType === 'subscribe' && !frequency} className="flex-1 py-3.5 px-5 rounded-xl bg-[#BFDDB8] hover:bg-[#A9D0A2] disabled:bg-[#F2F3F0] text-[#244B31] disabled:text-[#9AA29A] border border-[#8FB58D] text-sm font-bold shadow-md transition hover:-translate-y-0.5">{addedNotice ? 'Added to Gentle Routine ✓' : purchaseType === 'subscribe' && !frequency ? 'Choose delivery frequency' : `Add to Gentle Routine — ${formatINR(currentPrice * quantity)}`}</button></div>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] text-[#6F776F]"><span>✓ Secure checkout</span><span>✓ Gentle-care support</span><span>✓ Easy routine ordering</span></div>
             </div>
           </div>
