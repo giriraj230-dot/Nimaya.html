@@ -1,0 +1,6 @@
+{
+  "name": "Nimaya | Gentle Baby Care (0–4 Yrs)",
+  "description": "Nimaya offers thoughtful, gentle everyday baby care from the very beginning. Transparent ingredients, pediatric-tested formulations, and honest safety for little ones aged 0–4 years.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
