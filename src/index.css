@@ -114,17 +114,19 @@ body {
 .nimaya-nav.is-scrolled {
   background: rgba(255,250,242,.94) !important;
   border-color: rgba(63,98,82,.16) !important;
-  box-shadow: 0 12px 34px rgba(38,55,47,.10);
+  box-shadow: 0 4px 14px rgba(38,55,47,.08);
 }
 .nimaya-scroll-progress {
   position: absolute;
   left: 0;
   bottom: -1px;
   height: 3px;
-  width: var(--scroll-progress, 0%);
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
   background: linear-gradient(90deg, #c97f6b, #e6b39a 45%, #3f6252);
   box-shadow: 0 0 14px rgba(201,127,107,.38);
-  transition: width .08s linear;
 }
 
 /* Announcement strip has more identity. */
@@ -159,14 +161,6 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .nimaya-page *, .nimaya-scroll-progress { transition-duration: .01ms !important; }
-}
-
-/* Performance pass: render below-the-fold sections only as they approach the viewport. */
-@supports (content-visibility: auto) {
-  .nimaya-page main > div > section:not(:first-child) {
-    content-visibility: auto;
-    contain-intrinsic-size: 800px;
-  }
 }
 
 /* Avoid expensive blur work on the sticky header while scrolling. */

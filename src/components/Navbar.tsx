@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ShoppingBag, Sparkles, Menu, X, ShieldCheck } from 'lucide-react';
 import { Logo } from './Logo';
 import { ScreenView } from '../types';
@@ -31,17 +31,47 @@ export function Navbar({
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 28);
-    onScroll();
+    let ticking = false;
+    let lastScrolled = window.scrollY > 28;
+    setIsScrolled(lastScrolled);
+
+    const update = () => {
+      const y = window.scrollY;
+      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const progress = Math.min(1, y / max);
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${progress})`;
+      }
+      const nextScrolled = y > 28;
+      if (nextScrolled !== lastScrolled) {
+        lastScrolled = nextScrolled;
+        setIsScrolled(nextScrolled);
+      }
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   return (
     <header className={`nimaya-nav sticky top-0 z-40 w-full backdrop-blur-xl bg-[#FFFAF2]/88 border-b border-[#E7DDD0] ${isScrolled ? 'is-scrolled' : ''}`}>
-      <div className="nimaya-scroll-progress" aria-hidden="true" />
+      <div ref={progressRef} className="nimaya-scroll-progress" aria-hidden="true" />
       {/* Reassurance Announcement Banner - Sliding Marquee */}
       <div className="bg-[#F3EFEA] text-[#5C554D] text-xs font-medium py-2 border-b border-[#EBE4DA] overflow-hidden select-none">
         <div className="animate-marquee flex items-center">
