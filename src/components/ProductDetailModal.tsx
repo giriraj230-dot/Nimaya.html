@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { X, Star, Check, ChevronDown, ChevronLeft, ChevronRight, Droplets, Leaf, Sparkles, ListChecks, ShieldCheck } from 'lucide-react';
+import { X, Star, Check, ChevronDown, ChevronLeft, ChevronRight, Sparkles, ListChecks, ShieldCheck } from 'lucide-react';
 import { Product } from '../types';
 import { REVIEWS } from '../data/products';
 import { formatINR } from '../utils/format';
@@ -40,10 +40,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
 
   const galleryLabels = [
     { title: 'Product', sub: product.size },
-    { title: 'Gentle routine', sub: product.ageGuidance },
-    { title: 'Texture', sub: product.texture },
     { title: 'Ingredients + benefits', sub: 'Simple, clear care' },
-    { title: 'Ingredients', sub: 'What is inside' },
     { title: 'How to use', sub: 'Simple steps' },
     { title: 'Terms & conditions', sub: 'Care & safety' },
   ];
@@ -58,20 +55,6 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
   const GalleryVisual = ({ index, thumb = false }: { index: number; thumb?: boolean }) => {
     if (index === 0) return <img src={product.image} alt={product.name} className="w-full h-full object-contain" />;
     if (index === 1) return (
-      <div className="relative w-full h-full bg-gradient-to-br from-[#EEF3EC] to-[#FBF7F0] flex items-center justify-center overflow-hidden">
-        <div className="absolute w-36 h-36 rounded-full bg-white/65 -top-8 -right-8" />
-        <Leaf className="absolute left-5 top-5 text-[#61765E] w-8 h-8 opacity-60" />
-        <img src={product.image} alt={`${product.name} gentle routine`} className="relative z-10 h-[70%] w-[58%] object-contain drop-shadow-lg" />
-        {!thumb && <div className="absolute bottom-5 left-5 right-5 bg-white/88 backdrop-blur-sm rounded-2xl p-3 border border-white text-center"><p className="font-serif-brand text-[#274634] text-lg">Gentle care, every day</p><p className="text-[11px] text-[#6C766B] mt-0.5">Made for little routines and tender skin</p></div>}
-      </div>
-    );
-    if (index === 2) return (
-      <div className="w-full h-full bg-[#F8F3EA] flex flex-col items-center justify-center p-5 text-center">
-        <div className={`${thumb ? 'w-10 h-10' : 'w-24 h-24'} rounded-full bg-white shadow-sm flex items-center justify-center mb-3`}><Droplets className={`${thumb ? 'w-5 h-5' : 'w-10 h-10'} text-[#4E7058]`} /></div>
-        {!thumb && <><p className="font-serif-brand text-xl text-[#274634]">{product.texture}</p><p className="text-xs text-[#766F65] mt-2 max-w-[250px]">A closer look at the feel and experience of {product.name.toLowerCase()}.</p></>}
-      </div>
-    );
-    if (index === 3) return (
       <div className="w-full h-full bg-[#DDEED8] flex flex-col justify-center p-5">
         {!thumb && <p className="font-serif-brand text-xl text-[#214832] mb-4 text-center">Key Ingredients + Benefits</p>}
         <div className={`grid ${thumb ? 'grid-cols-1 gap-1' : 'grid-cols-3 gap-2'}`}>
@@ -85,15 +68,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
         </div>
       </div>
     );
-    if (index === 4) return (
-      <div className="w-full h-full bg-[#FFF0DF] flex flex-col justify-center p-5">
-        <div className={`${thumb ? 'hidden' : 'block'} text-center mb-4`}><p className="font-serif-brand text-xl text-[#6E452D]">Ingredients</p><p className="text-[10px] text-[#896B57] mt-1">Clear, simple and easy to understand</p></div>
-        <div className={`grid ${thumb ? 'grid-cols-1 gap-1' : 'grid-cols-2 gap-2'}`}>
-          {product.ingredients.slice(0, thumb ? 3 : 6).map((ing) => <div key={ing.name} className={`${thumb ? 'p-1' : 'p-2.5'} rounded-xl bg-white/90 border border-[#F0D7C2]`}><p className={`${thumb ? 'text-[6px]' : 'text-[10px]'} font-bold text-[#6B4935] line-clamp-1`}>{ing.name}</p>{!thumb && <p className="text-[9px] text-[#806C60] mt-0.5 line-clamp-2">{ing.purpose}</p>}</div>)}
-        </div>
-      </div>
-    );
-    if (index === 5) return (
+    if (index === 2) return (
       <div className="w-full h-full bg-[#E5F2E7] flex flex-col justify-center p-5">
         {!thumb && <div className="text-center mb-4"><ListChecks className="w-8 h-8 mx-auto text-[#356044] mb-2"/><p className="font-serif-brand text-xl text-[#214832]">How to Use</p></div>}
         <div className="space-y-2">{product.usageDirections.slice(0, thumb ? 3 : 4).map((step,i)=><div key={step} className={`flex items-start ${thumb ? 'gap-1' : 'gap-2'} bg-white/90 rounded-xl ${thumb ? 'p-1' : 'p-2.5'} border border-[#CFE2D1]`}><span className={`${thumb ? 'w-3 h-3 text-[6px]' : 'w-6 h-6 text-[10px]'} shrink-0 rounded-full bg-[#4F7759] text-white flex items-center justify-center font-bold`}>{i+1}</span><p className={`${thumb ? 'text-[5px]' : 'text-[10px]'} text-[#526658] leading-snug line-clamp-2`}>{step}</p></div>)}</div>
