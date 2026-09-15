@@ -122,7 +122,7 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
               </div>
 
               <div className="grid grid-cols-3 gap-2.5">
-                {topBenefits.map((benefit, i) => <div key={benefit} className={`rounded-2xl p-3.5 text-center border ${i === 0 ? 'bg-[#EEF6E9] border-[#D7E7D1]' : i === 1 ? 'bg-[#FFF4E9] border-[#F0DFCE]' : 'bg-[#F4F0E9] border-[#E6DED2]'}`}><div className="mx-auto mb-2 w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm"><Check className="w-3.5 h-3.5 text-[#31533C]"/></div><p className="text-[12px] font-bold leading-snug text-[#263B2E] line-clamp-3">{benefit}</p></div>)}
+                {topBenefits.map((benefit, i) => <div key={benefit} className={`min-h-[138px] rounded-[22px] px-4 py-5 text-center border-2 shadow-[0_5px_14px_rgba(45,67,52,0.08)] flex flex-col items-center justify-center ${i === 0 ? 'bg-[#DDEFD8] border-[#B9D7B1]' : i === 1 ? 'bg-[#FFE4CE] border-[#F0C6A5]' : 'bg-[#E9E2D8] border-[#D4C8B9]'}`}><div className="mx-auto mb-3 w-9 h-9 rounded-full bg-white border border-[#D8E1D7] flex items-center justify-center shadow-sm"><Check className="w-4.5 h-4.5 text-[#214C35] stroke-[3]"/></div><p className="text-[13px] sm:text-[14px] font-extrabold leading-[1.35] text-[#183B2A]">{benefit}</p></div>)}
               </div>
 
               <div className="rounded-[24px] border border-[#E4DED4] bg-white p-4 sm:p-5 shadow-[0_10px_30px_rgba(53,72,57,0.07)]">
