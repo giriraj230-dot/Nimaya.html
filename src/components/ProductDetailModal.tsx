@@ -109,32 +109,39 @@ export function ProductDetailModal({ product, onClose, onAddToCart }: ProductDet
               </div>
             </div>
 
-            <div className="space-y-5 pr-0 lg:pr-4 rounded-[28px] bg-[#F7FAF4] border border-[#D8E5D3] p-5 sm:p-7 shadow-[0_16px_40px_rgba(42,74,51,0.09)]">
+            <div className="space-y-6 pr-0 lg:pr-4 bg-transparent p-1 sm:p-2">
               <div className="flex flex-wrap items-center gap-2 pr-12">
-                <span className="text-[11px] font-semibold text-[#31533C] bg-[#E7EFE4] px-2.5 py-1 rounded-full">{product.category}</span>
-                <span className="flex items-center gap-1 text-xs text-[#6F6A62]"><Star className="w-3.5 h-3.5 fill-[#B98D55] text-[#B98D55]"/><b className="text-[#294735]">{product.rating}</b> ({product.reviewCount})</span>
-              </div>
-              <div><h2 id="modal-pdp-title" className="font-serif-brand text-3xl sm:text-4xl text-[#274634] font-medium leading-tight">{product.name}</h2><p className="font-serif-brand italic text-[#71806F] mt-1">“{product.tagline}”</p></div>
-              <p className="text-sm text-[#5F5A53] leading-relaxed">{product.shortDescription}</p>
-              <div className="flex flex-wrap gap-2"><span className="px-3 py-1.5 rounded-full bg-[#FFF3E8] border border-[#F0D9C7] text-[10px] font-semibold text-[#7B5A45]">Made for delicate skin</span><span className="px-3 py-1.5 rounded-full bg-white border border-[#DDE8D8] text-[10px] font-semibold text-[#49634F]">0–4 yrs care</span><span className="px-3 py-1.5 rounded-full bg-white border border-[#DDE8D8] text-[10px] font-semibold text-[#49634F]">Gentle everyday routine</span></div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                {topBenefits.map((benefit) => <div key={benefit} className="rounded-xl bg-white border border-[#DDE8D8] p-3 text-left shadow-[0_5px_16px_rgba(42,74,51,0.05)]"><Check className="w-4 h-4 text-[#31533C] mb-2"/><p className="text-[10px] leading-snug text-[#5F675F] line-clamp-3">{benefit}</p></div>)}
+                <span className="text-[11px] font-bold text-[#31533C] bg-[#EAF3E5] px-3 py-1.5 rounded-full">{product.category}</span>
+                <span className="flex items-center gap-1 text-xs text-[#766F66]"><Star className="w-3.5 h-3.5 fill-[#C49355] text-[#C49355]"/><b className="text-[#294735]">{product.rating}</b> ({product.reviewCount})</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-                <button onClick={() => { setPurchaseType('one-time'); setFrequency(null); }} className={`p-3.5 rounded-2xl border text-left transition-all ${purchaseType === 'one-time' ? 'border-[#31533C] bg-white ring-1 ring-[#31533C] shadow-md' : 'border-[#DDE6D9] bg-white hover:border-[#AFC4AC]'}`}>
-                  <p className="text-xs font-bold text-[#2E4034]">One-Time Purchase</p><div className="flex items-baseline gap-2 mt-1"><span className="font-serif-brand text-xl font-bold text-[#274634]">{formatINR(product.price)}</span>{product.originalPrice && <span className="text-xs line-through text-[#999086]">{formatINR(product.originalPrice)}</span>}</div>
-                </button>
-                <button onClick={() => setPurchaseType('subscribe')} className={`relative p-3.5 rounded-2xl border text-left transition-all bg-[#E5F0DF] hover:bg-[#DBEAD4] ${purchaseType === 'subscribe' ? 'border-[#31533C] ring-1 ring-[#31533C] shadow-md' : 'border-[#C8DAC2]'}`}>
-                  <span className="absolute -top-2 right-2 text-[9px] font-bold bg-[#31533C] text-white border border-[#31533C] px-2 py-1 rounded-full shadow-sm">SAVE 10%</span><p className="text-xs font-bold text-[#274634]">Subscribe & Save 10%</p><p className="font-serif-brand text-xl font-bold text-[#274634] mt-1">{formatINR(subscriptionPrice)} <span className="text-[10px] font-sans font-normal">/ delivery</span></p>
-                </button>
+              <div className="border-b border-[#E8E1D7] pb-5">
+                <h2 id="modal-pdp-title" className="font-serif-brand text-3xl sm:text-[42px] text-[#244B36] font-medium leading-[1.05]">{product.name}</h2>
+                <p className="font-serif-brand italic text-[#758474] mt-2 text-base">“{product.tagline}”</p>
+                <p className="text-sm text-[#655F58] leading-relaxed mt-4 max-w-xl">{product.shortDescription}</p>
               </div>
 
-              {purchaseType === 'subscribe' && <div className="rounded-2xl bg-[#F1F6EE] border border-[#D7E4D2] p-3.5"><p className="text-xs font-bold text-[#31533C] mb-2">Choose delivery frequency</p><div className="flex flex-wrap gap-2">{([30,60,90] as Frequency[]).map(days => <button key={days} onClick={() => setFrequency(days)} className={`px-3 py-2 rounded-xl text-[11px] font-semibold border transition ${frequency === days ? 'bg-[#31533C] border-[#31533C] text-white' : 'bg-white border-[#CAD8C7] text-[#48604A]'}`}>Every {days} days</button>)}</div><p className="text-[10px] text-[#738071] mt-2">Skip, pause or cancel anytime.</p></div>}
+              <div className="grid grid-cols-3 gap-2.5">
+                {topBenefits.map((benefit, i) => <div key={benefit} className={`rounded-2xl p-3.5 text-center border ${i === 0 ? 'bg-[#EEF6E9] border-[#D7E7D1]' : i === 1 ? 'bg-[#FFF4E9] border-[#F0DFCE]' : 'bg-[#F4F0E9] border-[#E6DED2]'}`}><div className="mx-auto mb-2 w-7 h-7 rounded-full bg-white flex items-center justify-center shadow-sm"><Check className="w-3.5 h-3.5 text-[#31533C]"/></div><p className="text-[10px] leading-snug text-[#59645B] line-clamp-3">{benefit}</p></div>)}
+              </div>
 
-              <div className="nimaya-pdp-buyrow flex items-center gap-3 pt-1"><div className="nimaya-pdp-qty flex items-center border border-[#D5E0D1] rounded-xl bg-white overflow-hidden"><button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-3 py-3 hover:bg-[#EEF4EB]">−</button><span className="px-3 text-xs font-bold">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="px-3 py-3 hover:bg-[#EEF4EB]">+</button></div><button onClick={handleAdd} disabled={purchaseType === 'subscribe' && !frequency} className="nimaya-pdp-add flex-1 py-3.5 px-5 rounded-xl bg-[#31533C] hover:bg-[#25432F] disabled:bg-[#E7EBE5] text-white disabled:text-[#9AA29A] border border-[#31533C] text-sm font-bold shadow-[0_8px_20px_rgba(49,83,60,0.18)] transition hover:-translate-y-0.5">{addedNotice ? 'Added to Gentle Routine ✓' : purchaseType === 'subscribe' && !frequency ? 'Choose delivery frequency' : `Add to Gentle Routine — ${formatINR(currentPrice * quantity)}`}</button></div>
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] text-[#6F776F]"><span>✓ Secure checkout</span><span>✓ Gentle-care support</span><span>✓ Easy routine ordering</span></div>
+              <div className="rounded-[24px] border border-[#E4DED4] bg-white p-4 sm:p-5 shadow-[0_10px_30px_rgba(53,72,57,0.07)]">
+                <div className="flex items-center justify-between mb-3"><div><p className="text-[10px] uppercase tracking-[0.14em] text-[#8A8177]">Choose your routine</p><p className="text-sm font-bold text-[#2E4034] mt-0.5">Purchase options</p></div><span className="text-[10px] text-[#71806F]">Gentle care, your way</span></div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button onClick={() => { setPurchaseType('one-time'); setFrequency(null); }} className={`relative p-4 rounded-2xl border text-left transition-all ${purchaseType === 'one-time' ? 'border-[#D99068] bg-[#FFF2E8] shadow-sm' : 'border-[#E7E1D8] bg-[#FCFAF6] hover:bg-[#FFF7F0]'}`}>
+                    <div className="flex items-center justify-between"><p className="text-xs font-bold text-[#314438]">One-Time</p>{purchaseType === 'one-time' && <span className="w-5 h-5 rounded-full bg-[#D99068] text-white flex items-center justify-center"><Check className="w-3 h-3"/></span>}</div><div className="flex items-baseline gap-2 mt-3"><span className="font-serif-brand text-2xl font-bold text-[#274634]">{formatINR(product.price)}</span>{product.originalPrice && <span className="text-xs line-through text-[#9A9288]">{formatINR(product.originalPrice)}</span>}</div><p className="text-[10px] text-[#81786E] mt-1">Buy whenever you need it</p>
+                  </button>
+                  <button onClick={() => setPurchaseType('subscribe')} className={`relative p-4 rounded-2xl border text-left transition-all ${purchaseType === 'subscribe' ? 'border-[#79A06F] bg-[#E8F3E3] shadow-sm' : 'border-[#D9E5D5] bg-[#F3F8F0] hover:bg-[#EAF4E5]'}`}>
+                    <span className="absolute -top-2 right-3 text-[9px] font-bold bg-[#F4B58E] text-[#633B28] border border-[#EAA77E] px-2.5 py-1 rounded-full">SAVE 10%</span><div className="flex items-center justify-between"><p className="text-xs font-bold text-[#274634]">Subscribe & Save</p>{purchaseType === 'subscribe' && <span className="w-5 h-5 rounded-full bg-[#5F8657] text-white flex items-center justify-center"><Check className="w-3 h-3"/></span>}</div><p className="font-serif-brand text-2xl font-bold text-[#274634] mt-3">{formatINR(subscriptionPrice)} <span className="text-[10px] font-sans font-normal">/ delivery</span></p><p className="text-[10px] text-[#6D7D69] mt-1">Flexible repeat deliveries</p>
+                  </button>
+                </div>
+
+                {purchaseType === 'subscribe' && <div className="mt-3 rounded-2xl bg-[#F4F8F1] border border-[#DCE8D8] p-3.5"><p className="text-xs font-bold text-[#31533C] mb-2">Delivery frequency</p><div className="grid grid-cols-3 gap-2">{([30,60,90] as Frequency[]).map(days => <button key={days} onClick={() => setFrequency(days)} className={`px-2 py-2.5 rounded-xl text-[10px] font-semibold border transition ${frequency === days ? 'bg-[#31533C] border-[#31533C] text-white' : 'bg-white border-[#D6E0D2] text-[#48604A]'}`}>{days} days</button>)}</div><p className="text-[10px] text-[#788176] mt-2">Skip, pause or cancel anytime.</p></div>}
+
+                <div className="nimaya-pdp-buyrow grid grid-cols-[auto_1fr] gap-3 mt-4"><div className="nimaya-pdp-qty flex items-center border border-[#E3DDD3] rounded-2xl bg-[#FAF7F1] overflow-hidden"><button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="px-3.5 py-4 hover:bg-[#F1ECE3]">−</button><span className="px-2 text-xs font-bold">{quantity}</span><button onClick={() => setQuantity(quantity + 1)} className="px-3.5 py-4 hover:bg-[#F1ECE3]">+</button></div><button onClick={handleAdd} disabled={purchaseType === 'subscribe' && !frequency} className="nimaya-pdp-add py-4 px-5 rounded-2xl bg-[#31533C] hover:bg-[#25432F] disabled:bg-[#E7EBE5] text-white disabled:text-[#9AA29A] text-sm font-bold shadow-[0_8px_20px_rgba(49,83,60,0.16)] transition">{addedNotice ? 'Added to Routine ✓' : purchaseType === 'subscribe' && !frequency ? 'Choose delivery frequency' : `Add to Routine · ${formatINR(currentPrice * quantity)}`}</button></div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 text-center text-[9px] text-[#6F776F]"><span className="rounded-xl bg-[#F8F6F1] border border-[#E8E3DA] px-2 py-2">✓ Secure checkout</span><span className="rounded-xl bg-[#F8F6F1] border border-[#E8E3DA] px-2 py-2">✓ Gentle support</span><span className="rounded-xl bg-[#F8F6F1] border border-[#E8E3DA] px-2 py-2">✓ Easy ordering</span></div>
             </div>
           </div>
 
