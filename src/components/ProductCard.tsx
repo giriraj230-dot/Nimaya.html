@@ -42,6 +42,8 @@ export function ProductCard({ product, onSelectProduct, onAddToCart }: ProductCa
           src={product.image}
           alt={product.name}
           referrerPolicy="no-referrer"
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
         />
 

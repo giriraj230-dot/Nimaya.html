@@ -60,7 +60,6 @@ body {
     radial-gradient(circle at 8% 8%, rgba(230,179,154,.24), transparent 28rem),
     radial-gradient(circle at 92% 34%, rgba(143,174,153,.23), transparent 30rem),
     linear-gradient(180deg, #fffaf2 0%, #f4eee4 48%, #eef3ed 100%);
-  background-attachment: fixed;
 }
 
 /* The page subtly changes mood as content moves over the fixed gradient. */
@@ -69,7 +68,7 @@ body {
 
 .nimaya-page section {
   position: relative;
-  transition: background-color .45s ease, border-color .35s ease, transform .35s ease;
+  transition: background-color .2s ease, border-color .2s ease;
 }
 
 #collection-section {
@@ -88,9 +87,9 @@ body {
 }
 
 .nimaya-page .group.rounded-2xl.bg-white:hover {
-  transform: translateY(-8px);
+  transform: translateY(-3px);
   border-color: rgba(63,98,82,.38) !important;
-  box-shadow: 0 20px 46px rgba(38,55,47,.15);
+  box-shadow: 0 14px 30px rgba(38,55,47,.12);
 }
 
 .nimaya-page button,
@@ -161,3 +160,14 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .nimaya-page *, .nimaya-scroll-progress { transition-duration: .01ms !important; }
 }
+
+/* Performance pass: render below-the-fold sections only as they approach the viewport. */
+@supports (content-visibility: auto) {
+  .nimaya-page main > div > section:not(:first-child) {
+    content-visibility: auto;
+    contain-intrinsic-size: 800px;
+  }
+}
+
+/* Avoid expensive blur work on the sticky header while scrolling. */
+.nimaya-nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }

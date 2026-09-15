@@ -1,5 +1,5 @@
 import { ArrowRight, ShieldCheck, Heart, Sparkles, Droplets } from 'lucide-react';
-import heroImg from '../assets/images/nimaya_hero_baby_1789380666451.jpg';
+import heroImg from '../assets/images/nimaya_hero_baby_1789380666451.webp';
 import { Logo } from './Logo';
 
 interface HeroProps {
@@ -16,6 +16,9 @@ export function Hero({ onExploreClick, onQuizClick }: HeroProps) {
           src={heroImg}
           alt="Mother tenderly holding her baby wrapped in a gentle organic blanket - Nimaya"
           referrerPolicy="no-referrer"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-[center_30%] sm:object-[75%_center] lg:object-[82%_center]"
         />
 

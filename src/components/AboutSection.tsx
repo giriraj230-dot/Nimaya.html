@@ -1,5 +1,5 @@
 import { ShieldCheck, Heart, Sparkles, Droplets, CheckCircle, FileText } from 'lucide-react';
-import heroImg from '../assets/images/nimaya_hero_baby_1789380666451.jpg';
+import heroImg from '../assets/images/nimaya_hero_baby_1789380666451.webp';
 import { Logo } from './Logo';
 
 interface AboutSectionProps {
@@ -42,7 +42,7 @@ export function AboutSection({ onOpenBrandPack }: AboutSectionProps) {
               <img
                 src={heroImg}
                 alt="Gentle touch baby care - Nimaya"
-                referrerPolicy="no-referrer"
+                referrerPolicy="no-referrer" loading="lazy" decoding="async"
                 className="w-full h-80 object-cover rounded-2xl"
               />
               <div className="p-5 flex flex-col items-center justify-center text-center bg-[#FAF8F5] rounded-b-2xl">

@@ -1,8 +1,8 @@
 import { Product, Review } from '../types';
-import cleanserImg from '../assets/images/prod_cleanser_v2_1789389968959.jpg';
-import sunscreenImg from '../assets/images/prod_sunscreen_v2_1789390016266.jpg';
-import shampooImg from '../assets/images/prod_shampoo_v2_1789390032446.jpg';
-import wipesImg from '../assets/images/prod_wipes_clean_1789393422363.jpg';
+import cleanserImg from '../assets/images/prod_cleanser_v2_1789389968959.webp';
+import sunscreenImg from '../assets/images/prod_sunscreen_v2_1789390016266.webp';
+import shampooImg from '../assets/images/prod_shampoo_v2_1789390032446.webp';
+import wipesImg from '../assets/images/prod_wipes_clean_1789393422363.webp';
 
 export const PRODUCTS: Product[] = [
   {
