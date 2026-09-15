@@ -166,73 +166,17 @@ body {
 /* Avoid expensive blur work on the sticky header while scrolling. */
 .nimaya-nav { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 
-/* Mobile product-page pass: compact, touch-friendly, and independent of desktop layout. */
+/* Safe mobile responsiveness: keeps the normal site visible and only adjusts spacing. */
 @media (max-width: 639px) {
-  .nimaya-pdp-overlay {
-    padding: 0 !important;
-    align-items: flex-end !important;
-    background: rgba(36,49,40,.42) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-  .nimaya-pdp-modal {
-    max-height: 100dvh !important;
-    height: 100dvh;
-    border-radius: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-  }
-  .nimaya-pdp-scroll {
-    padding: 14px 14px 104px !important;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-  }
-  .nimaya-pdp-modal > button[aria-label="Close details"] {
-    position: fixed !important;
-    top: 10px !important;
-    right: 10px !important;
-    padding: 9px !important;
-    box-shadow: 0 3px 12px rgba(38,55,47,.13) !important;
-  }
-  .nimaya-pdp-modal .aspect-square {
-    min-height: 0 !important;
-    aspect-ratio: 1 / .92 !important;
-    border-radius: 22px !important;
-  }
-  .nimaya-pdp-modal h2#modal-pdp-title {
-    font-size: 1.85rem !important;
-    line-height: 1.08 !important;
-  }
-  .nimaya-pdp-modal .grid.grid-cols-3.gap-2 > div {
-    padding: 8px 5px !important;
-  }
-  .nimaya-pdp-modal .grid.grid-cols-3.gap-2 > div p {
-    font-size: 9px !important;
-  }
-  .nimaya-pdp-buyrow {
-    position: sticky;
-    bottom: -104px;
-    z-index: 20;
-    margin: 0 -14px;
-    padding: 10px 14px 12px !important;
-    gap: 8px !important;
-    background: rgba(255,253,247,.97);
-    border-top: 1px solid #e3d9cd;
-    box-shadow: 0 -8px 22px rgba(55,64,56,.08);
-  }
-  .nimaya-pdp-qty button { padding: 12px 10px !important; }
-  .nimaya-pdp-qty span { padding-left: 8px !important; padding-right: 8px !important; }
-  .nimaya-pdp-add {
-    min-height: 46px;
-    padding: 10px 12px !important;
-    font-size: 12px !important;
-    line-height: 1.2 !important;
-  }
-  .nimaya-pdp-modal button:hover { transform: none !important; }
-  .nimaya-pdp-modal .flex.flex-wrap.gap-2 > button { min-height: 38px; }
+  .nimaya-pdp-overlay { padding: 0 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .nimaya-pdp-modal { width: 100% !important; max-width: 100% !important; max-height: 100dvh !important; border-radius: 0 !important; }
+  .nimaya-pdp-scroll { padding: 16px !important; overflow-y: auto !important; }
+  .nimaya-pdp-modal h2#modal-pdp-title { font-size: 1.8rem !important; line-height: 1.1 !important; }
+  .nimaya-pdp-buyrow { gap: 8px !important; }
+  .nimaya-pdp-add { min-height: 46px; }
+  .nimaya-pdp-modal button { touch-action: manipulation; }
 }
 
 @media (min-width: 640px) and (max-width: 1023px) {
-  .nimaya-pdp-modal { max-height: 96vh !important; }
-  .nimaya-pdp-scroll { padding: 24px !important; }
+  .nimaya-pdp-modal { max-height: 94vh !important; }
 }
